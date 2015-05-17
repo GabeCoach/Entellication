@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Webix</id>
+    <version>2.0.0</version>
+    <title>Webix – JavaScript UI Components Library</title>
+    <authors>Maksim Kozhukh</authors>
+    <owners>Maksim Kozhukh</owners>
+    <licenseUrl>http://www.gnu.org/licenses/gpl-3.0.en.html</licenseUrl>
+    <projectUrl>http://webix.com/</projectUrl>
+    <iconUrl>http://webix.com/wp-content/themes/webix/images/logo_footer.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>The library delivers over 40 fully customizable components, provides JQuery integration and can work with any server-side platform: PHP, .NET, Java, etc. Flexible layouts, unlimited extensibility, controllable look-and-feel, and intuitive API allow creating apps of any difficulty that will work equally well on desktop, mobile and tablet devices.</description>
+    <summary>Webix is a cross-browser, cross-device JavaScript framework for building interactive web applications using JavaScript, CSS, HTML5 techniques.</summary>
+    <releaseNotes>- advanced editos and filters
+- progress bars
+- promises
+
+Full list of changes - http://docs.webix.com/desktop__whats_new_2.html</releaseNotes>
+    <copyright>XB Software</copyright>
+    <tags>component javascript jquery widget framework grid tree chart layout calendar</tags>
+  </metadata>
+</package>

@@ -1,0 +1,264 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="Content/webix.css" rel="stylesheet" />
+    <script src="Scripts/webix.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        webix.ui({
+            rows: [
+                {
+                    gravity: 1,
+                    view: "template",
+                    type: "header",
+                    template: "EntilliHelp.com"
+                },
+       
+                {
+                    gravity: 12,
+                    cols: [
+                        {
+                            gravity: 6,
+                            view: "multiview",
+                            cells: [
+                                {
+                                    id: "callsView",
+                                    rows: [
+                                        { view: "template", type: "header", template: "Calls" },
+                                        { view: "richselect", id: "txtcCustID", label: "Customer ID:", labelWidth: 150, options: [{ id: 1, value: "Active" }, { id: 2, value: "Inactive" }] },
+                                        { view: "richselect", label: "Product ID:", id: "txtcProdID", labelWidth: 150, options: [{ id: 1, value: "Active" }, { id: 2, value: "Inactive" }] },
+                                        { view: "richselect", label: "Technician ID", id: "txtcTechID", labelWidth: 150, options: [{ id: 1, value: "Active" }, { id: 2, value: "Inactive" }] },
+                                        { view: "richselect", label: "Status:", id: "txtCallStatus", labelWidth: 150, options: [{ id: 1, value: "Active" }, { id: 2, value: "Inactive" }] },
+                                        { view: "datepicker", label: "Date/Time:", id: "txtCallDateTime", labelWidth: 150 },
+                                        { view: "text", label: "Reference Number", id: "txtcRefNo", labelWidth: 150},
+                                        { view: "textarea", inputHeight: 150, inputWidth: 600, label: "CallDescription:", id: "txtCallDesctiprion", labelWidth: 150 },
+                                        
+                           {
+                               cols: [
+                                   { view: "button", value: "Save", click: "SaveCalls" },
+                                   { view: "button", value: "Search", click: "searchCalls"},            
+                                   { view: "button", value: "Cancel", type: "cancel" }
+
+                               ],
+                           },
+                                    ]
+                                },
+                                {
+
+                                    view: "datatable",
+                                    url: "http://localhost:60908/api/Calls",
+                                    columns: [
+                                        { id: "CallID", header: "Id", sort: "int" },
+                                        { id: "cCustomerID", header: "Customer", sort: "string" },
+                                        { id: "cStatus", header: "Status", sort: "string" },
+                                        { id: "cTechnician", header: "Technician", sort: "string" },
+                                        { id: "CallDesc", header: "Call Description", sort: "string"},
+                                        { id: "cDateTime", header: "Date and Time", sort: "string" },
+                                        { id: "cReferenceNo", header: "Reference Number", sort: "int" },
+                                        { id: "cProductID", header: "Product", sort: "string" }
+                                    ],
+                                    datatype: "json",
+                                    
+                                },
+                                {gravity: 8},
+
+                                {
+                                    id: "customerView",
+                                    rows: [
+                                        { view: "template", type: "header", template: "Customer" },
+                                        { view: "text", label: "First Name:", labelWidth: 150 },
+                                        { view: "text", label: "Last Name:", labelWidth: 150 },
+                                        { view: "richselect", label: "Status:", labelWidth: 150, options: [{ id: 1, value: "Active" }, { id: 2, value: "Inactive" }] },
+                                        { view: "text", label: "Phone:", labelWidth: 150 },
+                                        { view: "text", label: "E-Mail:", labelWidth: 150 },
+                                        {
+                                            cols: [
+                                                { view: "button", value: "Save", click: "SaveCustomer" },
+                                                {view: "button", value: "Search", click: "searchCustomer"},
+                                                { view: "button", value: "Cancel", type: "cancel" }
+
+                                            ]
+                                        },
+                                        {
+                                            view: "datatable",
+                                            url: "http://localhost:60908/api/Customers",
+                                            columns: [
+                                                        { id: "CustomerID", header: "Id", sort: "int" },
+                                                        { id: "CustFirstName", header: "First Name", sort: "string" },
+                                                        { id: "CustLastName", header: "Last Name", sort: "string" },
+                                                        { id: "CustStatus", header: "Status", sort: "string" },
+                                                        { id: "CustPhone", header: "Phone", sort: "string" },
+                                                        { id: "CustEMail", header: "E-Mail", sort: "string" }
+                                            ],
+                                            datatype: "json",
+                                           
+                                        },
+                                        { gravity: 8 }
+                                    ]
+                                },
+                                {
+                                    id: "productView",
+                                    rows: [
+                                        { view: "text", id: "txtProductName", label: "Product Name:", labelWidth: 250 },
+                                        { view: "richselect", id: "txtProductType", label: "Product Type:", labelWidth: 250, options: [{ id: 1, value: "one" }, { id: 2, value: "two" }] },
+                                        {
+                                            cols: [
+                                                { view: "button", value: "Save", click: "SaveProduct" },
+                                                { view: "button", value: "Search", click: "searchProduct"},
+                                                { view: "button", value: "Cancel", type: "cancel" }
+                                                
+                                            ]
+                                        },
+                                        {
+                                            view: "datatable",
+                                            datatype: "json",
+                                            url: "http://localhost:60908/api/products2",
+                                            columns: [
+                                                        { id: "ProductID", header: "Id", sort: "int" },
+                                                        { id: "ProductName", header: "Product Name", sort: "string" },
+                                                        { id: "ProductType", header: "Product Type", sort: "string" }
+                                            ],
+                                            
+                                           
+                                        },
+                                    { gravity: 8 }
+                                    ]
+                                },
+                                {
+                                    id: "technicianView",
+                                    rows: [
+                                        { view: "template", type: "header", template: "Technician" },
+                                        { view: "text", id: "txtTechFirstName", label: "First Name:", labelWidth: 150 },
+                                        { view: "text", id: "txtTechLastName", label: "Last Name:", labelWidth: 150 },
+                                        { view: "richselect", id: "txtTechStatus", label: "Status:", labelWidth: 150, options: [{ id: 1, value: "Active" }, { id: 2, value: "Inactive" }] },
+                                        { view: "text", id: "txtTechPhone", label: "Phone:", labelWidth: 150 },
+                                        { view: "text", id: "txtTechEmail", label: "E-mail:", labelWidth: 150 },
+                                        {
+                                            cols: [
+                                                { view: "button", value: "Save" },
+                                                { view: "button", value: "Search", click: "SearchTechnician"},
+                                                { view: "button", value: "Cancel", type: "cancel" }
+
+
+                                            ]
+                                        },
+                                        {
+                                            view: "datatable",
+                                            url: "http://localhost:60908/api/Customers",
+                                            datatype: "json",
+                                            columns: [
+                                                        { id: "TechnicianID", header: "Id", sort: "int" },
+                                                        { id: "tFirstName", header: "First Name", sort: "string" },
+                                                        { id: "tLastName", header: "Last Name", sort: "string" },
+                                                        { id: "tStatus", header: "Status", sort: "string" },
+                                                        { id: "tPhone", header: "Phone", sort: "string" },
+                                                        { id: "tEMail", header: "E-Mail", sort: "string" }
+                                            ],
+                                            
+                                               
+                                        },
+                                        
+
+                                        { gravity: 8 },
+
+
+
+                                    ]
+                                },
+
+                                
+                            ]
+                        },
+                        
+
+                        { view: "resizer" },
+                        {
+                            gravity: 1,
+                            rows: [
+                                { view: "button", value: "Call", gravity: 1, click: "$$('callsView').show()", type: "iconButton", icon: "phone", label: "Call" },
+                                { view: "button", value: "Customer", gravity: 1, click: "$$('customerView').show()", type: "iconButton", icon: "users", label: "Customer" },
+                                { view: "button", value: "Products", gravity: 1, click: "$$('productView').show()", type: "iconButton", icon: "laptop", label: "Products"},
+                                { view: "button", value: "Technician", gravity: 1, click: "$$('technicianView').show()", type: "iconButton", icon: "gear", label: "Technician" },
+                                
+                                { gravity: 8 }
+                            ]
+
+                        }
+                    ]
+                },
+                {
+                    gravity: 1,
+                    view: "template",
+                    type: "footer",
+                    template: "EntilliHelp.com Copyright 2015"
+                },
+            ]
+        });
+
+        function SaveProduct() {
+            var ProductName = $$('txtProductName').$getValue();
+            var ProductType = $$('txtProductType').getText();
+            var data = { "ProductName": ProductName, "ProductType": ProductType }
+            webix.ajax().post('http://localhost:60908/api/products2', data, function (text, xml, xhr) {
+                alert(text);
+            })
+
+        }
+
+        function SaveCustomer() {
+            var CustFirstName = $$('txtCustFirstName').$getValue();
+            var CustLastName = $$('txtCustLastName').$getValue();
+            var CustStatus = $$('txtCustStatus').getText();
+            var CustPhone = $$('txtCustPhone').$getValue();                                                                                                                                                          
+            var CustEmail = $$('txtCustEmail').$getValue();
+            var data = { "FirstName": CustFirstName, "LastName": CustLastName, "Status": CustStatus, "Phone": CustPhone, "EMail": CustEmail }
+            webix.ajax().post('http://localhost:60908/api/Customers', data, function (text, xml, xhr) {
+                alert(text);
+            })
+
+        }
+
+        function SaveTechnician() {
+            var TechFirstName = $$('txtTechFirstName').$getValue();
+            var TechLastName = $$('txtTechLastName').$getValue();
+            var TechStatus = $$('txtTechStatus').getText();
+            var TechPhone = $$('txtTechPhone').$getValue();
+            var TechEmail = $$('txtTechEmail').$getValue();
+            var data = { "tFirstName": TechFirstName, "tLastName": TechLastName, "tStatus": TechStatus, "tPhone": TechPhone, "tEMail": TechEmail }
+            webix.ajax().post('http://localhost:60908/api/Technician', data, function (text, xml, xhr) {
+            })
+        }
+
+        function SaveCalls() {
+            var cCustID = $$('txtcCustID').getText();
+            var cProdID = $$('txtcProdID').getText();
+            var cTechID = $$('txtcTechID').getText();
+            var cStatus = $$('txtCallStatus').getText();
+            var cRefNo = $$('txtcRefNo').$getValue();
+            var CallDesc = $$('txtCallDescription').$getValue();
+            var cDateTime = $$('txtCallDateTime').$getValue();
+            var data = { "cCustomerID": cCustID, "cStatus": cStatus, "cTechnicianID": cTechID, "CallDesc": CallDesc, "cDateTime": cDateTime, "cReferenceNo": cRefNo, "cProductID": cProdID }
+            webix.ajax().post('http://localhost:60908/api/Calls', data, function (text, xml, xhr){
+            })
+
+            
+        }
+
+        function searchProduct() {
+            alert("1");
+            var ProductName = $$('txtProductName').$getValue();
+            alert("2");
+            var ProductType = $$('txtProductType').getText();
+            alert("3");
+            var data = { "ProductName": ProductName, "ProductType": ProductType }
+            alert("4");
+            webix.ajax().get('http://localhost:60908/api/products2/GetByName/' + ProductName, data, function (text, xml, xhr) {
+                alert(text);
+            })
+        }
+
+    </script>
+</body>
+</html>
